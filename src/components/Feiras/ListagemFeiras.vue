@@ -1,24 +1,34 @@
 <template>
-    <div >
-       <h1>Listagem de Feiras</h1>
-       
-       <div v-for="(feira, index) in feiras" :key="index">
-        <FeiraCard :feira="feira" :index="index"></FeiraCard> 
-    </div>
-       
+    <div class="container">
+
+        <div v-for="(feira, index) in feiras[diaSel]" :key="index">
+            <FeiraCard :feira="feira" :index="index"></FeiraCard>
+        </div>
+
+    
+            <div v-if="feiras[diaSel] == 0" class="box">
+                Nenhuma feira disponível hoje
+            </div>
+
+
+
         </div>
 </template>
   
 <script>
 import FeiraCard from './FeiraCard.vue';
+import axios from 'axios';
 export default {
     name: 'ListagemFeiras',
-    components:{
+    components: {
         FeiraCard,
+    },
+    props: {
+        diaSel: Number
     },
     data() {
         return {
-            feiras: [{"_id":{"$oid":"642a1f932a742c006bd5d3f0"},"nome":"Feira inicial","bairro":"Cristo Rei","tipo":["matutino"],"dia_da_semana":{"$numberDecimal":"6"},"horario_inicial":{"$date":{"$numberLong":"1680444000000"}},"horario_final":{"$date":{"$numberLong":"1680458400000"}}}],
+            feiras: [],
 
 
 
@@ -30,27 +40,40 @@ export default {
         this.diaSelecionado = this.dataAtual.getDay();
 
     },
+    mounted() {
+        this.listarFeiras()
+    },
     methods: {
+        listarFeiras() {
+            axios.get('http://localhost:3000/feiras', {
+                timeout: 5000 // define um timeout de 5 segundos
+            })
+                .then(response => {
+                    // cria um objeto com sete arrays, um para cada dia da semana
+                    const feirasPorDia = {
+                        0: [], // domingo
+                        1: [], // segunda
+                        2: [], // terça
+                        3: [], // quarta
+                        4: [], // quinta
+                        5: [], // sexta
+                        6: [], // sábado
+                    };
 
-        avancarDia() {
-            if (this.diaSelecionado < 6) {
-                this.diaSelecionado++;
-            } else {
-                this.diaSelecionado = 0;
-            }
-        },
-        voltarDia() {
-            if (this.diaSelecionado > 0) {
-                this.diaSelecionado--;
-            } else {
-                this.diaSelecionado = 6;
-            }
+                    // percorre as feiras e adiciona cada uma ao array correspondente ao seu dia_da_semana
+                    response.data.forEach(feira => {
+                        feirasPorDia[feira.dia_da_semana].push(feira);
+                    });
+
+                    // atribui as feiras obtidas à variável 'feiras' como um objeto com sete propriedades, uma para cada dia da semana
+                    this.feiras = feirasPorDia;
+                })
+                .catch(error => {
+                    console.log(error); // exibe o erro no console, se ocorrer
+                });
         }
-
-
-
-
     }
+
 };
 </script>
   
@@ -79,13 +102,7 @@ export default {
     cursor: pointer;
 }
 
-.calendario-horizontal .esquerda {
-    left: 0;
-}
 
-.calendario-horizontal .direita {
-    right: 0;
-}
 
 .calendario-horizontal .dias {
     display: flex;
