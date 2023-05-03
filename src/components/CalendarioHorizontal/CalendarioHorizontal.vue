@@ -1,7 +1,6 @@
 <template>
     <div class="calendario-horizontal">
       <div class="dias">
-  
         <div v-for="(dia, index) in dias" :key="index" :class="{ ativo: index === diaSelecionado }" class="has-text-weight-bold" @click="selecionarDia(index)">
           {{ dia }}
         </div>
