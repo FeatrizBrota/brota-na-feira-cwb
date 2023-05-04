@@ -4,6 +4,7 @@
             <h1 class="title">Brota na Feira</h1>
             <p class="subtitle">Abriu Achou Brotou - aqui você descobe as melhores feiras da cidade!</p>
         </div>
+        <input class="input is-rounded" type="text" placeholder="Rounded input">
         <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
         <ListagemFeiras :diaSel="diaSelecionado"></ListagemFeiras>
     </div>
