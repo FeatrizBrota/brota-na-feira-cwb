@@ -1,23 +1,25 @@
 <template>
-    <div class="container">
-        <div class="notification is-info">
-            <h1 class="title">Brota na Feira</h1>
-            <p class="subtitle">Abriu Achou Brotou - aqui você descobe as melhores feiras da cidade!</p>
-        </div>
+    <div>
+<HeaderPrincipal></HeaderPrincipal>
+        <div class="container">
+  
         <input class="input is-rounded" type="text" placeholder="Rounded input">
         <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
         <ListagemFeiras :diaSel="diaSelecionado"></ListagemFeiras>
     </div>
+    </div>
+
 </template>
 
 <script>
 import CalendarioHorizontal from '../CalendarioHorizontal/CalendarioHorizontal.vue';
 //import MenuLateral from '../MenuLateral/MenuLateral.vue';
 import ListagemFeiras from '../Feiras/ListagemFeiras.vue';
+import HeaderPrincipal from '../HeaderPrincipal/HeaderPrincipal.vue';
 
 export default {
     name: "HomePage",
-    components: { CalendarioHorizontal, ListagemFeiras, },
+    components: { CalendarioHorizontal, ListagemFeiras, HeaderPrincipal },
     data() {
         return {
             diaSelecionado:-1,

@@ -1,7 +1,8 @@
 <template>
   <div class="progresso">
-    <progress class="progress is-primary" :value="progresso" max="100">{{ progresso }}%</progress>
-
+    <span>{{ inicio }} h - {{ fim }} h</span>
+    
+    <progress class="progress is-small barra" :value="progresso" max="100">{{ progresso }}%</progress>
   </div>
 </template>
   
@@ -20,19 +21,21 @@ export default {
   },
   data() {
     return {
-      progresso: 0
+      progresso: 0,
+      inicio:'',
+      fim:''
     }
   },
   mounted() {
     setInterval(() => {
-      const inicio = new Date(this.dataInicio).getUTCHours();
-      const fim = new Date(this.dataFim).getUTCHours();
+      this.inicio = new Date(this.dataInicio).getUTCHours();
+      this.fim = new Date(this.dataFim).getUTCHours();
 
       const agora = new Date().toLocaleString('pt-BR', { hour: 'numeric' });
     
-      const duracao = fim - inicio;
+      const duracao = this.fim - this.inicio;
 
-      const decorrido = agora - inicio;
+      const decorrido = agora - this.inicio;
 
     
 
@@ -49,7 +52,14 @@ export default {
   
 <style scoped>
 .progresso {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
+  align-items: center;
+}
+.barra{
+  margin: 0 !important;
+  width: 50%;
 }
 </style>
   

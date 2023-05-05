@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
     <HomePage></HomePage>
   </div>
 
