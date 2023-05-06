@@ -6,15 +6,12 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `
-          @import "@/assets/styles/_variables.scss";
-          @import "@/assets/styles/_mixins.scss";
-        `,
-      },
-      css: {
-        // defina a fonte padrão para o projeto
-        'font-family': 'Nunito Sans',
+        additionalData: `@import "@/assets/styles/variables.scss";`,
       },
     },
   },
 };
+
+
+
+

@@ -1,7 +1,10 @@
 <template>
         <div class="header-bnf">
             <div class=" title-content">
-            <h1 class="title">Brota na Feira</h1>
+                <div>
+                    <h1>BROTA NA FEIRA</h1>
+                </div>
+            
             <p class="subtitle">Abriu Achou Brotou - aqui você descobe as melhores feiras da cidade!</p>
             </div>
             
@@ -29,12 +32,13 @@ export default {
     
 </script>
 
-<style  scoped>
+<style  lang="scss" scoped>
 .title-content{
     margin: 30px !important;
 }
 .header-bnf{
-    background-color: beige;
+    background-color: $purple;
+    font-weight: 100;
     padding-top: 70px;
     margin: 0 !important;
     margin-top: -70px !important;
