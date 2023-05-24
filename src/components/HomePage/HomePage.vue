@@ -1,44 +1,43 @@
 <template>
     <div>
-<HeaderPrincipal></HeaderPrincipal>
-        <div class="container">
-  
-        <input class="input is-rounded" type="text" placeholder="Rounded input">
+      <HeaderPrincipal></HeaderPrincipal>
+      <div class="container">
+        <SearchInput @search="updateSearchQuery"></SearchInput>
         <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
-        <ListagemFeiras :diaSel="diaSelecionado"></ListagemFeiras>
+        <ListagemFeiras :diaSel="diaSelecionado" :searchQuery="searchQuery"></ListagemFeiras>
+      </div>
     </div>
-    </div>
-
-</template>
-
-<script>
-import CalendarioHorizontal from '../CalendarioHorizontal/CalendarioHorizontal.vue';
-//import MenuLateral from '../MenuLateral/MenuLateral.vue';
-import ListagemFeiras from '../Feiras/ListagemFeiras.vue';
-import HeaderPrincipal from '../HeaderPrincipal/HeaderPrincipal.vue';
-
-export default {
+  </template>
+  
+  <script>
+  import CalendarioHorizontal from '../CalendarioHorizontal/CalendarioHorizontal.vue';
+  import ListagemFeiras from '../Feiras/ListagemFeiras.vue';
+  import SearchInput from '../SearchInput/SearchInput.vue';
+  import HeaderPrincipal from '../HeaderPrincipal/HeaderPrincipal.vue';
+  
+  export default {
     name: "HomePage",
-    components: { CalendarioHorizontal, ListagemFeiras, HeaderPrincipal },
+    components: { CalendarioHorizontal, ListagemFeiras, HeaderPrincipal, SearchInput },
     data() {
-        return {
-            diaSelecionado:-1,
-
-        }
-
+      return {
+        diaSelecionado: -1,
+        searchQuery: ''
+      };
     },
     methods: {
-        receberDiaSelecionado(dia) {
-            this.diaSelecionado = dia;
-  },
+      receberDiaSelecionado(dia) {
+        this.diaSelecionado = dia;
+      },
+      updateSearchQuery(query) {
+        this.searchQuery = query; // Atualizando a propriedade searchQuery com o valor da busca
+      }
     }
-    
-}
-</script>
-
-<style  scoped>
-.container{
+  };
+  </script>
+  
+  <style scoped>
+  .container {
     margin: 10px;
-}
-
-</style>
+  }
+  </style>
+  

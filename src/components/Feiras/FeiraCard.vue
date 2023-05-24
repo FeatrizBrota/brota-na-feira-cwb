@@ -72,9 +72,10 @@ export default {
   margin-top: 10px;
 }
 .bairro {
-    background-color: aquamarine;
+    background-color: #B7D739;
+    color: #1B3C1D;
     margin: 0 !important ;
-    padding: 3px;
+    padding: 5px;
     border-radius: 10px;
     font-size: 1rem;
 

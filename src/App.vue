@@ -25,5 +25,7 @@ export default {
   font-family: 'Raleway', sans-serif;
   text-align: center;
   color: #2c3e50;
+  background-color: #f8f3f3;
+  max-height: 100%;
 }
 </style>

@@ -60,6 +60,7 @@ export default {
 .barra{
   margin: 0 !important;
   width: 50%;
+  background-color: #FF8300;
 }
 </style>
   
