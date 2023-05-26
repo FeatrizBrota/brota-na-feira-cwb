@@ -79,7 +79,7 @@
   
   <style scoped>
   .container {
-    margin: 10px;
+    padding: 10px;
   }
   
   .box {

@@ -1,20 +1,23 @@
 <template>
   <div>
+    <RouterView>
 
-    <HomePage></HomePage>
+</RouterView>
+    <MenuBarra></MenuBarra>
   </div>
 
 </template>
 
 <script>
-import HomePage from './components/HomePage/HomePage.vue';
+
+import MenuBarra from './components/MenuBarra/MenuBarra.vue';
 
 
 
 export default {
   name: 'App',
   components: {
-    HomePage
+    MenuBarra
 }
 }
 </script>

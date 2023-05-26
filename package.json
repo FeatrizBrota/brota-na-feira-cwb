@@ -16,7 +16,9 @@
     "feather-icons": "^4.29.0",
     "moment": "^2.29.4",
     "swiper": "^9.2.4",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-router": "^4.2.1",
+    "vuetify": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

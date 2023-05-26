@@ -70,7 +70,6 @@ export default {
 .calendario-horizontal .dias {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex: 1;
 
   height: 100%;

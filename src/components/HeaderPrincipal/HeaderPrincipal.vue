@@ -1,19 +1,6 @@
 <template>
     <div class="menu-principal">
         <div class="logo-container">
-      <!-- <div class="menu-options" :class="{ 'menu-open': isMenuOpen }">
-        <ul>
-          <li style="z-index: 1;">Feiras Favoritas</li>
-          <li style="z-index: 1;">Meu Perfil</li>
-          <li style="z-index: 1;">Colabore</li>
-        </ul>
-      </div>
-      <div class="menu-burger" @click="toggleMenu">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div> -->
-
         <img src="images/logo.png" alt="Logo Brota na Feira" class="logo-img">
       </div>
     </div>
@@ -45,8 +32,9 @@ export default {
 .menu-principal {
   display: flex;
   align-items: center;
-  padding: 30px;
+  padding: 50px;
   background-color: #B7D739;
+  border-radius:  0 0 30px 30px ;
 }
 
 .logo-container {
