@@ -1,16 +1,18 @@
 <template>
     <div>
-<h1>COMPONENTE USUÁRIO</h1>     
+
+<LoginPage/>
       </div>
 
   </template>
   
   <script>
+import LoginPage from '../components/Login/LoginPage.vue';
 
   
   export default {
     name: "UserPage",
-    components: {  },
+    components: { LoginPage },
     data() {
       return {
 
