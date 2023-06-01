@@ -1,36 +1,33 @@
 <template>
     <div class="container">
-      <div v-for="(feira, index) in filteredFeiras" :key="index">
-        <FeiraCard :feira="feira" :index="index"></FeiraCard>
-      </div>
-  
-      <div v-if="filteredFeiras.length === 0 && feiras[diaSel] !== undefined" class="box">
-        Nenhuma feira disponível hoje
-      </div>
+      <ListagemPadrao :feiras="feiras"></ListagemPadrao>
+     
     </div>
   </template>
   
   <script>
-  import FeiraCard from './FeiraCard.vue';
+  import ListagemPadrao from './ListagemPadrao.vue';
   import axios from 'axios';
   
   export default {
     name: 'ListagemFeiras',
     components: {
-      FeiraCard,
+      ListagemPadrao,
+  
     },
     props: {
-      diaSel: Number,
-      searchQuery: String,
+      searchQuery: String
+    
     },
     data() {
       return {
         feiras: {},
+        
+      
       };
     },
     created() {
-      this.dataAtual = new Date();
-      this.diaSelecionado = this.dataAtual.getDay();
+
     },
     mounted() {
       this.listarFeiras();
@@ -73,6 +70,7 @@
             console.log(error);
           });
       },
+
     },
   };
   </script>

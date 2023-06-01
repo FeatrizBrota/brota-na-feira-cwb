@@ -14,7 +14,6 @@
 				</div>
 			</div>
 		</div>
-    
 	</div>
 </template>
 
@@ -34,11 +33,13 @@
 		padding: 40px 15px;
 		min-height: 100vh;
 		background-color: #fff;
+		position: relative;
+		overflow: hidden;
 	}
 
 	.btn-google-box {
 		display: flex;
-		justify-content: start;
+		justify-content: flex-start;
 		margin-top: 15px;
 	}
 
@@ -47,6 +48,7 @@
 		background-color: #1b3c1d;
 		padding: 20px 50px;
 		border-radius: 15px;
+    user-select: none;
 		font-size: 1rem !important;
 		font-family: "Raleway", sans-serif;
 		text-transform: uppercase;
@@ -55,7 +57,8 @@
 		transition: transform 0.3s, box-shadow 0.3s;
 		cursor: pointer;
 	}
-  i{
+  
+  i {
     margin-right: 10px;
   }
 
@@ -87,5 +90,29 @@
 
 	p {
 		font-size: 1rem !important;
+	}
+
+	.container::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, #1b3c1d 0%, #2b5832 100%);
+		z-index: -1;
+		animation: backgroundAnimation 15s linear infinite;
+	}
+
+	@keyframes backgroundAnimation {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
 	}
 </style>

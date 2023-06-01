@@ -5,7 +5,7 @@
         <div class="content">
           <div class="display-flex titulo-feira">
             <h1 class="title">{{ feira.nome }}</h1>
-            <i class="fa-regular fa-heart"></i>
+            <i class="fa-regular fa-circle-check"></i>
           </div>
           <div class="endereco-feira">
             <h2>{{ feira.endereco }}</h2>
