@@ -1,47 +1,41 @@
 <template>
-    <div>
-      <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
-      <div v-if="feiras[diaSel] && feiras[diaSel].length > 0">
-        <div v-for="(feira, index) in feiras[diaSel]" :key="index">
-          <FeiraCard :feira="feira" :index="index"></FeiraCard>
-        </div>
-      </div>
-      <div v-else class="box">
-        Nenhuma feira disponível hoje
+  <div>
+    <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
+    <div v-if="feiras[diaSel] && feiras[diaSel].length > 0">
+      <div v-for="(feira, index) in feiras[diaSel]" :key="index" @click="navegarParaFeira(feira)">
+        <FeiraCard :feira="feira" :index="index"></FeiraCard>
       </div>
     </div>
-  </template>
-  
-  <script>
-    import CalendarioHorizontal from '../CalendarioHorizontal/CalendarioHorizontal.vue';
-    import FeiraCard from './FeiraCard.vue';
+    <div v-else class="box">
+      Nenhuma feira disponível hoje
+    </div>
+  </div>
+</template>
 
-  export default {
-    data() {
-      return {
-        diaSel: Number,
+<script>
+import CalendarioHorizontal from '../CalendarioHorizontal/CalendarioHorizontal.vue';
+import FeiraCard from './FeiraCard.vue';
 
-
-      };
-    },
-    props:{
-        feiras:{}
-    },
-    components:{
-        CalendarioHorizontal,
-        FeiraCard
-    },
-    created() {
-
-    },
-    mounted() {
-
-    },
-    methods:{
-        receberDiaSelecionado(dia) {
+export default {
+  data() {
+    return {
+      diaSel: Number,
+    };
+  },
+  props: {
+    feiras: {}
+  },
+  components: {
+    CalendarioHorizontal,
+    FeiraCard
+  },
+  methods: {
+    receberDiaSelecionado(dia) {
       this.diaSel = dia;
     },
+    navegarParaFeira(feira) {
+      this.$router.push({ path: '/feira', query: { feiraId: feira.nome } });
     }
-  };
-  </script>
-  
+  }
+};
+</script>
