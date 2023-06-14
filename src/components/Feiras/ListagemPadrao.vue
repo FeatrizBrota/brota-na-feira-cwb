@@ -34,7 +34,7 @@ export default {
       this.diaSel = dia;
     },
     navegarParaFeira(feira) {
-      this.$router.push({ path: '/feira', query: { feiraId: feira.nome } });
+      this.$router.push({ path: '/feira', query: { feiraId: feira._id } });
     }
   }
 };
