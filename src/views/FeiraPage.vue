@@ -13,9 +13,9 @@
 			<div class="info-feira">
 				<div class="info-tags">
 					<div class="tags">
-						<h3>{{ retornaDia(feira.dia_da_semana) }}</h3>
-						<h3>{{ feira.bairro }}</h3>
-						<h3>{{ feira.tipo }}</h3>
+						<TagsInfo :title="retornaDia(feira.dia_da_semana)" :color="'verde-claro'"></TagsInfo>
+						<TagsInfo :title="feira.bairro"></TagsInfo>
+						<TagsInfo :title="feira.tipo"></TagsInfo>
 					</div>
 					<div class="horarios">
 						<BarraProgresso
@@ -29,18 +29,27 @@
 					<div class="info-endereco">
 						<h2>Como Brotar:</h2>
 						<p>{{ feira.endereco }}</p>
-						<p>{{ feira.referencia }}</p>
+						<p class="referencia">{{ feira.referencia }}</p>
 					</div>
 
-					<div class="img-map">
-						<!-- <img src="images/map.png" alt="mapa"> -->
+					<div
+						class="img-map"
+						@click="
+							linkMaps(
+								'https://www.google.com/maps/place/rua+da+bandeira+500+cabral'
+							)
+						"
+					>
+						<div class="sob-img-map">
+							<h1>Brotar</h1>
+						</div>
 					</div>
 				</div>
 				<div class="box box-colabore">
 					<h2>Essa Informação foi útil?</h2>
 					<div class="box-vote">
 						<i
-            :class="{ active: isLiked === true }"
+							:class="{ active: isLiked === true }"
 							class="fa-regular fa-thumbs-up"
 							@click="toggleLike"
 						></i>
@@ -66,10 +75,11 @@
 
 <script>
 	import BarraProgresso from "@/components/BarraProgresso/BarraProgresso.vue";
+	import TagsInfo from "@/components/Tags/TagsInfo.vue";
 	import axios from "axios";
 	export default {
 		name: "FeiraPage",
-		components: { BarraProgresso },
+		components: { BarraProgresso,TagsInfo },
 		data() {
 			return {
 				feiraId: null,
@@ -112,11 +122,16 @@
 			goTo(route) {
 				this.$router.push({ name: route });
 			},
+			linkMaps(url) {
+				window.open(url, "_blank");
+			},
 			toggleLike() {
 				this.isLiked = !this.isLiked;
+				this.isDisliked = false;
 			},
 			toggleDislike() {
 				this.isDisliked = !this.isDisliked;
+				this.isLiked = false;
 			},
 		},
 	};
@@ -124,22 +139,26 @@
 
 <style lang="scss" scoped>
 	.container {
-		height: 100vh;
+		min-height: 100vh;
 		background-color: #b7d739;
 		display: flex;
+		margin-bottom: 40px;
 		justify-content: center;
 	}
 
 	.conteudo {
+		min-height: 100%;
 		background-color: #fff;
 		width: 100%;
-		border-radius: 60px;
+		border-radius: 60px 60px 0 0;
 		margin-top: 40px;
 		padding: 15px;
+		
 	}
 	.header-feira {
 		display: flex;
 		align-items: center;
+		margin-top: 20px;
 
 		// background-color: #b7d739;
 
@@ -148,6 +167,7 @@
 		}
 	}
 	.titulo {
+		
 		margin-left: 20px;
 		h1 {
 			font-size: 2rem;
@@ -161,9 +181,16 @@
 		text-align: center;
 	}
 	p {
+		font-size: 1.1em;
 		text-align: left;
+
 	}
+
+	.referencia{
+			font-size: 0.8em;
+		}
 	.info-endereco {
+		line-height:1.8;
 		padding: 15px;
 	}
 	.box-endereco {
@@ -180,8 +207,31 @@
 		background-image: url("../../public/images/map.png");
 		background-size: 100%;
 		height: 150px;
-		/* Outros estilos da imagem de mapa */
+		.sob-img-map {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			h1 {
+				cursor: pointer;
+				user-select: none;
+				text-transform: uppercase;
+				color: #1B3C1D;
+				font-size: 20px;
+				font-weight: 800;
+			}
+			h1:hover {
+				text-transform: uppercase;
+				color: #FF8300;
+				font-size: 25px;
+				font-weight: 800;
+			}
+
+			background-color: #ff90e757;
+			width: 100%;
+			height: 100%;
+		}
 	}
+
 	.vote-icon {
 		transition: color 0.3s ease-in-out;
 	}
@@ -189,13 +239,16 @@
 	.thumbs-up.active {
 		color: green;
 	}
-  .fa-regular {
-  transition: font-size 0.3s ease-in-out;
-}
-
-.active {   
-		color: #FF90E7;
+	.fa-regular {
+		transition: font-size 0.3s ease-in-out;
 	}
+
+	.active {
+		color: #ff90e7;
+	}
+.box-colabore{
+	margin-bottom: 20px;
+}
 	.box-vote {
 		display: flex;
 		justify-content: space-between;

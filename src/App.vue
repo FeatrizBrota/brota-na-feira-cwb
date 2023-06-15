@@ -30,5 +30,6 @@ export default {
   color: #2c3e50;
   background-color: #f8f3f3;
   max-height: 100%;
+  /* padding-bottom: 100px; Define uma margem inferior para reservar espaço para o menu bar */
 }
 </style>

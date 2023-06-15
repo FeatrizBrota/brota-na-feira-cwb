@@ -26,16 +26,18 @@
   </script>
   
   <style scoped>
-  .menu-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-    background-color: #B7D739;
-    padding: 10px;
-    box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.123);
-  }
+.menu-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: #B7D739;
+  padding: 10px;
+  box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.123);
+}
+
+
   
   .menu-items {
     display: flex;

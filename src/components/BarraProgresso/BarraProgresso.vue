@@ -1,6 +1,6 @@
 <template>
   <div class="progresso">
-    <span>{{ inicio }} h - {{ fim }} h</span>
+    <span class="horarios"> {{ inicio }} h - {{ fim }} h</span>
     <div class="barra-wrapper">
       <div class="barra" :style="{ width: progresso + '%' }"></div>
     </div>
@@ -62,7 +62,9 @@ export default {
   border-radius: 5px;
   background-color: #ddd;
 }
-
+.horarios{
+  font-size: 1.2em;
+}
 .barra {
   height: 100%;
   background-color: #FF8300;
