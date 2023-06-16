@@ -34,5 +34,7 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
+  padding-bottom: 30px;
 }
+
 </style>

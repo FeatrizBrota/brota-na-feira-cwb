@@ -27,9 +27,10 @@
   <style scoped>
   .tag {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 5px 8px;
     border-radius: 10px;
     font-size: 1rem;
+    height: fit-content;
     margin: 0 !important ;
     font-weight: bold;
   }
