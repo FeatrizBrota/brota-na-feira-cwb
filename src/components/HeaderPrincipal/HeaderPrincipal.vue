@@ -1,31 +1,36 @@
 <template>
-    <div class="menu-principal">
-        <div class="logo-container">
-        <img src="images/logo.png" alt="Logo Brota na Feira" class="logo-img">
-      </div>
+  <div class="menu-principal" v-if="isMobileOrTablet">
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Logo Brota na Feira" class="logo-img">
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
-
-
 export default {
-    name: "HeaderPrincipal",
-    components: { },
-    data() {
-        return {
-            isMenuOpen: false
-
-        }
-
-    },
-    methods: {
-        toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    }
+  name: "HeaderPrincipal",
+  data() {
+    return {
+      isMobileOrTablet: false
+    };
   },
+  mounted() {
+    this.isMobileOrTablet = this.checkIfMobileOrTablet();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    checkIfMobileOrTablet() {
+      const mq = window.matchMedia("(max-width: 768px)");
+      return mq.matches;
+    },
+    handleResize() {
+      this.isMobileOrTablet = this.checkIfMobileOrTablet();
     }
-    
+  }
+};
 </script>
 
 <style scoped>
@@ -38,57 +43,17 @@ export default {
 }
 
 .logo-container {
-    flex: 1;
-    text-align: center;
-
+  flex: 1;
+  text-align: center;
 }
 
 .logo-img {
-width: 10%;
+  width: 10%;
 }
 
-.menu-options {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  padding: 20px;
-  background-color: #fff;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1;
-}
-
-.menu-open {
-  transform: translateX(0%);
-}
-
-.menu-options ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu-options li {
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.menu-burger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 2;
-  margin-left: 10px;
-}
-
-.bar {
-  width: 100%;
-  height: 2px;
-  background-color: #333;
+@media (min-width: 769px) {
+  .menu-principal {
+    display: none;
+  }
 }
 </style>

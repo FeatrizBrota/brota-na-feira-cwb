@@ -45,6 +45,7 @@ export default {
 <style scoped>
 .card-feira {
     margin-top:10px;
+    cursor:pointer;
 
 }
 

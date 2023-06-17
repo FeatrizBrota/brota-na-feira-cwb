@@ -1,10 +1,13 @@
 <template>
     <div class="menu-lateral">
+    <div class="box-itens-menu">
       <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <li>Feiras</li>
+        <li>Perfil</li>
+        <li>Colabore</li>
       </ul>
+    </div>
+
     </div>
   </template>
 
@@ -21,8 +24,8 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 200px;
-  background-color: #030C15;
+  width: 15%;
+  background-color: #B7D739;
   padding: 20px;
 }
 
@@ -34,7 +37,16 @@ export default {
 
 .menu-lateral li {
   margin-bottom: 10px;
+  text-align: left;
   cursor: pointer;
+  border: 1px solid #242c06;
+}
+
+.box-itens-menu{
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items:center;
 }
 
 

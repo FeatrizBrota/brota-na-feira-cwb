@@ -60,11 +60,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   position: relative;
 
   width: 100%;
-  height: 60px;
+  height: 100%;
 }
 
 .calendario-horizontal .dias {
@@ -73,13 +73,13 @@ export default {
   flex: 1;
 
   height: 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .calendario-horizontal .dias div {
-  width: 50px;
-  height: 50px;
-  margin-left: 5px;
+  width: 100%;
+  height: 100%;
+  margin: 2px;
   border-radius: 5px;
   background-color: #FF90E7;
   color: #1B3C1D;
