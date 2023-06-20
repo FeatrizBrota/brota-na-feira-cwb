@@ -1,8 +1,9 @@
 <template>
   <div>
     <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
-    <div v-if="feiras[diaSel] && feiras[diaSel].length > 0">
-      <div v-for="(feira, index) in feiras[diaSel]" :key="index" @click="navegarParaFeira(feira)">
+    --- >{{ filtro_tipo }}
+    <div v-if="feiras[diaSel] && filteredFeiras.length > 0">
+      <div v-for="(feira, index) in filteredFeiras" :key="index" @click="navegarParaFeira(feira)">
         <FeiraCard :feira="feira" :index="index"></FeiraCard>
       </div>
     </div>
@@ -23,11 +24,36 @@ export default {
     };
   },
   props: {
-    feiras: {}
+    feiras: {},
+    filtro_tipo: {
+    type: String, // Definindo o tipo de propriedade como String
+  },
   },
   components: {
     CalendarioHorizontal,
     FeiraCard
+  },
+  computed:{
+    filteredFeiras() {
+				if (this.feiras[this.diaSel] === undefined) {
+					return [];
+				}
+
+        if (this.filtro_tipo == '') {
+					return this.feiras[this.diaSel];
+				}
+
+				var filtro = this.feiras[this.diaSel]
+				if(this.filtro_tipo.length != 0 ){
+					filtro =filtro.filter((feira)=>
+					feira.tipo.includes(this.filtro_tipo))
+
+				}
+				return filtro
+				
+			
+			},
+    
   },
   methods: {
     receberDiaSelecionado(dia) {

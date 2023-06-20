@@ -51,7 +51,7 @@ export default {
   width: 10%;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 900px) {
   .menu-principal {
     display: none;
   }

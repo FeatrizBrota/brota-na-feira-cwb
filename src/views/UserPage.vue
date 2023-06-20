@@ -27,6 +27,7 @@ import LoginPage from '../components/Login/LoginPage.vue';
   <style scoped>
   .container {
     min-height: 100vh;
+    width: 100%;
   }
   
   </style>

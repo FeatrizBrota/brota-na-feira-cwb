@@ -1,7 +1,6 @@
 <template>
   <section class="home-page">
-    <HeaderPrincipal></HeaderPrincipal>
-    <div class="container">
+    <div class="container" :class="{ 'web-margin': isWeb }">
       <SearchInput @search="updateSearchQuery"></SearchInput>
       <ListagemFeiras :searchQuery="searchQuery"></ListagemFeiras>
     </div>
@@ -11,21 +10,34 @@
 <script>
 import ListagemFeiras from '../components/Feiras/ListagemFeiras.vue';
 import SearchInput from '../components/SearchInput/SearchInput.vue';
-import HeaderPrincipal from '../components/HeaderPrincipal/HeaderPrincipal.vue';
+// import HeaderPrincipal from '../components/HeaderPrincipal/HeaderPrincipal.vue';
 
 export default {
   name: "HomePage",
-  components: {  ListagemFeiras, HeaderPrincipal, SearchInput },
+  components: {  ListagemFeiras, SearchInput },
   data() {
     return {
-     
-      searchQuery: ''
+      searchQuery: '',
+      isWeb: false
     };
   },
+  mounted() {
+    this.isWeb = this.checkIfWeb();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  },
   methods: {
-
     updateSearchQuery(query) {
       this.searchQuery = query;
+    },
+    checkIfWeb() {
+      const mq = window.matchMedia("(min-width: 768px)");
+      return mq.matches;
+    },
+    handleResize() {
+      this.isWeb = this.checkIfWeb();
     }
   }
 };
@@ -37,4 +49,13 @@ export default {
   padding-bottom: 30px;
 }
 
+.web-margin {
+  padding-top: 50px;
+}
+
+@media (max-width: 767px) {
+  .web-margin {
+    margin-top: 0;
+  }
+}
 </style>

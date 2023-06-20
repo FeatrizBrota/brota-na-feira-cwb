@@ -73,8 +73,8 @@ export default {
 <style scoped>
 .container {
   padding: 40px 15px;
-  min-height: 100vh;
-  background-color: #fff;
+  /* min-height: 100vh; */
+  background-color: #F8F3F3;
   position: relative;
   overflow: hidden;
 }

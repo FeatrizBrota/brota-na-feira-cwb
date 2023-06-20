@@ -2,14 +2,14 @@
 	<div class="container">
 		<TagContainer>
 			<div class="tag" v-for="(tag, index) in tiposDeFeira" :key="index">
-				<TagsInfo :title="tag[0]"></TagsInfo>
+				<TagsInfo :title="tag[0]" @click="filtrarFeirasPorTag(tag[0])"></TagsInfo>
 			</div>
 		</TagContainer>
 		<ListagemBuscas
-			v-if="searchQuery.length > 0"
+			v-if="searchQuery.length > 0 || (searchQuery.length > 0 && localSearchQuery.length > 0)"
 			:feiras="filteredFeiras"
 		></ListagemBuscas>
-		<ListagemPadrao v-else :feiras="feiras_semana"></ListagemPadrao>
+		<ListagemPadrao v-else :feiras="feiras_semana" :filtro_tipo="localSearchQuery" ></ListagemPadrao>
 	</div>
 </template>
 
@@ -35,6 +35,7 @@
 			return {
 				feiras: {},
 				feiras_semana: {},
+				localSearchQuery: '',
 			};
 		},
 		created() {},
@@ -47,10 +48,26 @@
 					return [];
 				}
 
-				return this.feiras.filter((feira) =>
-					feira.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
-				);
+				if (this.localSearchQuery == '') {
+					return this.feiras
+				}
+
+				var filtro = this.feiras
+				if(this.localSearchQuery.length != 0 ){
+					filtro =filtro.filter((feira)=>
+					feira.tipo.includes(this.localSearchQuery))
+
+				}
+				if(this.searchQuery.length !=0){
+					console.log('aqui')
+				filtro =filtro.filter((feira) =>
+					feira.nome.toLowerCase().includes(this.searchQuery.toLowerCase()))
+				}
+				return filtro
+				
+			
 			},
+
 			tiposDeFeira() {
 				if (this.feiras === undefined) {
 					return [];
@@ -95,6 +112,15 @@
 					.catch((error) => {
 						console.log(error);
 					});
+			},
+			filtrarFeirasPorTag(tagTitle) {
+				if( this.localSearchQuery == tagTitle ){
+					this.localSearchQuery = ''	
+				} else{
+					this.localSearchQuery = tagTitle;
+				}
+				
+			
 			},
 		},
 	};
