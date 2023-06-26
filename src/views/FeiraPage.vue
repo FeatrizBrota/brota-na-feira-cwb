@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="box container">
 		<div class="conteudo">
 			<div class="header-feira">
 				<div @click="goTo('HomePage')">
@@ -13,7 +13,17 @@
 			<div class="info-feira">
 				<div class="info-tags">
 					<div class="tags">
-						<TagsInfo :title="retornaDia(feira.dia_da_semana)" :color="'verde-claro'"></TagsInfo>
+						<div>
+							<TagsInfo
+								v-for="(dia, index) in feira.dia_da_semana"
+								:key="index"
+								:title="retornaDia(dia)"
+								:color="'verde-claro'"
+								class="tag-dia"
+								@click="selectDay(dia)"
+							></TagsInfo>
+						</div>
+
 						<TagsInfo :title="feira.bairro"></TagsInfo>
 						<TagsInfo :title="feira.tipo"></TagsInfo>
 					</div>
@@ -32,14 +42,7 @@
 						<p class="referencia">{{ feira.referencia }}</p>
 					</div>
 
-					<div
-						class="img-map"
-						@click="
-							linkMaps(
-								'https://www.google.com/maps/place/rua+da+bandeira+500+cabral'
-							)
-						"
-					>
+					<div class="img-map" @click="linkMaps(feira.link_maps)">
 						<div class="sob-img-map">
 							<h1>Brotar</h1>
 						</div>
@@ -79,7 +82,7 @@
 	import axios from "axios";
 	export default {
 		name: "FeiraPage",
-		components: { BarraProgresso,TagsInfo },
+		components: { BarraProgresso, TagsInfo },
 		data() {
 			return {
 				feiraId: null,
@@ -119,6 +122,10 @@
 				];
 				return diasDaSemana[numeroDia];
 			},
+			selectDay(tag) {
+				const routeParams = { tag: tag }; // Define os parâmetros da rota
+				this.$router.push({ name: "HomePage", params: routeParams }); // Redireciona para a HomePage com os parâmetros
+			},
 			goTo(route) {
 				this.$router.push({ name: route });
 			},
@@ -139,21 +146,15 @@
 
 <style lang="scss" scoped>
 	.container {
-		min-height: 100vh;
-		background-color: #b7d739;
 		display: flex;
-		margin-bottom: 40px;
 		justify-content: center;
+		width: 100%;
 	}
 
 	.conteudo {
-		min-height: 100%;
 		background-color: #fff;
-		width: 100%;
-		border-radius: 60px 60px 0 0;
-		margin-top: 40px;
-		padding: 15px;
-		
+
+		min-height: 100vh;
 	}
 	.header-feira {
 		display: flex;
@@ -164,10 +165,15 @@
 
 		i {
 			font-size: 30px;
+			cursor: pointer;
+			transition: font-size 0.3s, color 0.3s;
+		}
+		i:hover {
+			font-size: 40px;
+			color: #ff8300;
 		}
 	}
 	.titulo {
-		
 		margin-left: 20px;
 		h1 {
 			font-size: 2rem;
@@ -183,14 +189,13 @@
 	p {
 		font-size: 1.1em;
 		text-align: left;
-
 	}
 
-	.referencia{
-			font-size: 0.8em;
-		}
+	.referencia {
+		font-size: 0.8em;
+	}
 	.info-endereco {
-		line-height:1.8;
+		line-height: 1.8;
 		padding: 15px;
 	}
 	.box-endereco {
@@ -203,6 +208,7 @@
 		display: flex;
 		justify-content: space-between;
 	}
+
 	.img-map {
 		background-image: url("../../public/images/map.png");
 		background-size: 100%;
@@ -215,13 +221,13 @@
 				cursor: pointer;
 				user-select: none;
 				text-transform: uppercase;
-				color: #1B3C1D;
+				color: #1b3c1d;
 				font-size: 20px;
 				font-weight: 800;
 			}
 			h1:hover {
 				text-transform: uppercase;
-				color: #FF8300;
+				color: #ff8300;
 				font-size: 25px;
 				font-weight: 800;
 			}
@@ -246,15 +252,17 @@
 	.active {
 		color: #ff90e7;
 	}
-.box-colabore{
-	margin-bottom: 20px;
-}
+	.box-colabore {
+		margin-bottom: 20px;
+	}
 	.box-vote {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		padding: 10px 100px;
 		i {
 			font-size: 50px;
+			margin: 15px;
+			cursor: pointer;
 		}
 	}
 </style>

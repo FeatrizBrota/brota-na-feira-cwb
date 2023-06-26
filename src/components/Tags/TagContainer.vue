@@ -11,7 +11,7 @@
 <style>
 	.tag-container {
 		width: 100%;
-		overflow-x: auto;
+		/* overflow-x: auto; */
 	}
 
 	/* .tag-scroll {
@@ -22,6 +22,7 @@
 		display: flex;
 		flex-wrap: nowrap;
 		padding: 8px;
+		cursor: pointer;
 	}
     .tags:last-child{
         margin-bottom: 0;

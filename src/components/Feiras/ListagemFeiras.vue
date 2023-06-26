@@ -2,14 +2,25 @@
 	<div class="container">
 		<TagContainer>
 			<div class="tag" v-for="(tag, index) in tiposDeFeira" :key="index">
-				<TagsInfo :title="tag[0]" @click="filtrarFeirasPorTag(tag[0])"></TagsInfo>
+				<TagsInfo
+					:title="tag"
+					@click="filtrarFeirasPorTag(tag)"
+				></TagsInfo>
 			</div>
 		</TagContainer>
 		<ListagemBuscas
-			v-if="searchQuery.length > 0 || (searchQuery.length > 0 && localSearchQuery.length > 0)"
+			v-if="
+				searchQuery.length > 0 ||
+				(searchQuery.length > 0 && localSearchQuery.length > 0)
+			"
 			:feiras="filteredFeiras"
 		></ListagemBuscas>
-		<ListagemPadrao v-else :feiras="feiras_semana" :filtro_tipo="localSearchQuery" ></ListagemPadrao>
+		<ListagemPadrao
+			v-else
+			:feiras="feiras_semana"
+			:filtro_tipo="localSearchQuery"
+			:selectedDay="selectedDay"
+		></ListagemPadrao>
 	</div>
 </template>
 
@@ -30,12 +41,13 @@
 		},
 		props: {
 			searchQuery: String,
+			selectedDay:String,
 		},
 		data() {
 			return {
 				feiras: {},
 				feiras_semana: {},
-				localSearchQuery: '',
+				localSearchQuery: "",
 			};
 		},
 		created() {},
@@ -45,27 +57,28 @@
 		computed: {
 			filteredFeiras() {
 				if (this.feiras === undefined) {
+
 					return [];
 				}
 
-				if (this.localSearchQuery == '') {
-					return this.feiras
+				if (this.localSearchQuery == "" && this.searchQuery=="") {
+					return this.feiras;
 				}
 
-				var filtro = this.feiras
-				if(this.localSearchQuery.length != 0 ){
-					filtro =filtro.filter((feira)=>
-					feira.tipo.includes(this.localSearchQuery))
-
+				var filtro = this.feiras;
+				if (this.localSearchQuery.length != 0) {
+					console.log("aquiss");
+					filtro = filtro.filter((feira) =>
+						feira.tipo.includes(this.localSearchQuery)
+					);
 				}
-				if(this.searchQuery.length !=0){
-					console.log('aqui')
-				filtro =filtro.filter((feira) =>
-					feira.nome.toLowerCase().includes(this.searchQuery.toLowerCase()))
+				if (this.searchQuery.length > 0) {
+					console.log("aqui");
+					filtro = filtro.filter((feira) =>
+						feira.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
+					);
 				}
-				return filtro
-				
-			
+				return filtro;
 			},
 
 			tiposDeFeira() {
@@ -104,7 +117,9 @@
 						};
 
 						response.data.forEach((feira) => {
-							feirasPorDia[feira.dia_da_semana].push(feira);
+							feira.dia_da_semana.forEach((dia) => {
+								feirasPorDia[dia].push(feira);
+							});
 						});
 
 						this.feiras_semana = feirasPorDia;
@@ -113,14 +128,13 @@
 						console.log(error);
 					});
 			},
+
 			filtrarFeirasPorTag(tagTitle) {
-				if( this.localSearchQuery == tagTitle ){
-					this.localSearchQuery = ''	
-				} else{
+				if (this.localSearchQuery == tagTitle) {
+					this.localSearchQuery = "";
+				} else {
 					this.localSearchQuery = tagTitle;
 				}
-				
-			
 			},
 		},
 	};
@@ -134,7 +148,7 @@
 	.box {
 		margin-top: 10px;
 		padding: 10px;
-		background-color: #f0f0f0;
+		background-color: #f0f0f002;
 		border-radius: 4px;
 		text-align: center;
 	}

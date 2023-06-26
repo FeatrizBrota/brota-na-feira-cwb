@@ -1,6 +1,6 @@
 <template>
   <div class="progresso">
-    <span class="horarios"> {{ inicio }} h - {{ fim }} h</span>
+    <span class="horarios"> {{ inicio }} - {{ fim }}</span>
     <div class="barra-wrapper">
       <div class="barra" :style="{ width: progresso + '%' }"></div>
     </div>
@@ -29,20 +29,23 @@ export default {
   },
   mounted() {
     setInterval(() => {
-      this.inicio = new Date(this.dataInicio).getUTCHours();
-      this.fim = new Date(this.dataFim).getUTCHours();
+      const inicioHoras = parseInt(this.dataInicio);
+      const fimHoras = parseInt(this.dataFim);
 
-      const agora = new Date().toLocaleString('pt-BR', { hour: 'numeric' });
+      const agora = new Date().getHours();
 
-      const duracao = this.fim - this.inicio;
+      const duracao = fimHoras - inicioHoras;
 
-      const decorrido = agora - this.inicio;
+      const decorrido = agora - inicioHoras;
 
       if (duracao <= 0) {
         this.progresso = 100; // Feira já terminou
       } else {
         this.progresso = Math.min(100, Math.round((decorrido / duracao) * 100)); // Limita o progresso a 100%
       }
+
+      this.inicio = this.dataInicio;
+      this.fim = this.dataFim;
     }, 1000);
   }
 };
@@ -62,9 +65,11 @@ export default {
   border-radius: 5px;
   background-color: #ddd;
 }
-.horarios{
+
+.horarios {
   font-size: 1.2em;
 }
+
 .barra {
   height: 100%;
   background-color: #FF8300;

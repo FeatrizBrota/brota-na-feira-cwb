@@ -1,60 +1,90 @@
 <template>
-    <nav class="menu-bar">
-      <div class="menu-items">
-        <button @click="goTo('UserPage')" class="menu-button">
-          <i class="fas fa-user"></i>
-        </button>
-        <button @click="goTo('HomePage')" class="menu-button">
-          <i class="fas fa-home"></i>
-        </button>
-        <button @click="goTo('ColaborePage')" class="menu-button">
-          <i class="fas fa-users"></i>
-        </button>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <img src="images/logo.png" alt="Logo">
+      </a>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" @click="toggleMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div class="navbar-menu" :class="{'is-active': isMenuOpen}">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#" @click="goTo('HomePage')" :class="{'is-active': activeItem === 'feiras'}">Feiras</a>
+        <a class="navbar-item" href="#" @click="goTo('ColaborePage')" :class="{'is-active': activeItem === 'colabore'}">Colabore</a>
       </div>
-    </nav>
-  </template>
-  
-  <script>
-  export default {
-    name: 'MenuBarra',
-    methods: {
-      goTo(route) {
-        this.$router.push({ name: route });
-      },
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isMenuOpen: false,
+      activeItem: null
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
     },
-  };
-  </script>
-  
-  <style scoped>
-.menu-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  background-color: #B7D739;
-  padding: 10px;
-  box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.123);
+    goTo(route) {
+      this.$router.push({ name: route });
+      this.closeMenu();
+    },
+    closeMenu() {
+      this.isMenuOpen = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+
+
+.navbar {
+  margin-bottom: 2rem;
 }
 
+.navbar-brand .navbar-burger {
+  color: #1B3C1D;
+  background-color: #B7D739 !important;
+}
 
-  
-  .menu-items {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .menu-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    margin: 0 40px;
-  }
-  
-  .menu-button i {
-    font-size: 20px;
-    color: #1B3C1D;
-  }
-  </style>
-  
+.navbar-brand {
+  color: #1B3C1D;
+  background-color: #B7D739 !important;
+}
+
+.navbar-menu {
+  background-color: #B7D739;
+}
+
+.navbar-start .navbar-item {
+  color: #1B3C1D;
+  transition: font-size 0.3s, color 0.3s;
+}
+
+.navbar-start .navbar-item:hover {
+  color: #FF8300;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.616);
+  cursor: pointer;
+}
+
+.navbar-start .navbar-item.is-active {
+  background-color: #1B3C1D !important;
+}
+
+.navbar-start .navbar-item.is-active:hover {
+  background-color: #1B3C1D !important;
+}
+
+.navbar-start .navbar-item:active {
+  background-color: #1B3C1D !important;
+}
+</style>

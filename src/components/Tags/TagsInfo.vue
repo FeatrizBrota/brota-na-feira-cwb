@@ -27,17 +27,22 @@
   <style scoped>
   .tag {
     display: inline-block;
+    margin: 5px;
     padding: 5px 8px;
     border-radius: 10px;
     font-size: 1rem;
     height: fit-content;
-    margin: 0 !important ;
     font-weight: bold;
   }
    
 .verde-claro{
   background-color: #B7D739;
     color: #1B3C1D;
+}
+.verde-claro:hover{
+  background-color: #1B3C1D;
+    color: #B7D739;
+
 }
    
   .red {

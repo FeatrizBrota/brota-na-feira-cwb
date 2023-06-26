@@ -24,11 +24,25 @@ export default {
       diaSelecionado: '',
     };
   },
+  props:{
+    selectedDay:String,
+  },
   created() {
-    this.dataAtual = new Date();
+
+      this.dataAtual = new Date();
     this.diaSelecionado = this.dataAtual.getDay();
+
+
   },
   watch: {
+    selectedDay(){
+      if(this.selectedDay){
+        console.log('aqui')
+        this.diaSelecionado = this.selectedDay
+   
+      }
+    },
+
     diaSelecionado() {
       this.$emit('dia-selecionado', this.diaSelecionado);
     },
@@ -60,7 +74,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 30px; */
+  margin: 10px 0;
   position: relative;
 
   width: 100%;

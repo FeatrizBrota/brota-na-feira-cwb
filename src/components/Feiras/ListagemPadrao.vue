@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CalendarioHorizontal @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
-    --- >{{ filtro_tipo }}
+    <CalendarioHorizontal  :selectedDay="selectedDay" @diaSelecionado="receberDiaSelecionado"></CalendarioHorizontal>
     <div v-if="feiras[diaSel] && filteredFeiras.length > 0">
       <div v-for="(feira, index) in filteredFeiras" :key="index" @click="navegarParaFeira(feira)">
         <FeiraCard :feira="feira" :index="index"></FeiraCard>
@@ -28,6 +27,7 @@ export default {
     filtro_tipo: {
     type: String, // Definindo o tipo de propriedade como String
   },
+  selectedDay:String
   },
   components: {
     CalendarioHorizontal,

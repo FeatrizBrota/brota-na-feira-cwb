@@ -39,6 +39,7 @@ export default {
 .search-input {
   display: flex;
   align-items: center;
+  margin: 10px 0;
 }
 
 input[type="text"] {
@@ -52,13 +53,6 @@ input[type="text"] {
   flex: 1;
 }
 
-.mobile-margin {
-  margin-top: -30px;
-}
 
-@media (min-width: 769px) {
-  .mobile-margin {
-    margin-top: 0;
-  }
-}
+
 </style>

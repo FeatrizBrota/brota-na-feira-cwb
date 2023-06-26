@@ -5,7 +5,7 @@ import FeiraPage from '../views/FeiraPage.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/:tag?',
         name: 'HomePage',
         component: HomePage
     },
