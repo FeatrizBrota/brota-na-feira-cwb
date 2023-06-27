@@ -5,9 +5,11 @@
 				<TagsInfo
 					:title="tag"
 					@click="filtrarFeirasPorTag(tag)"
+					:selected="tag === localSearchQuery"
 				></TagsInfo>
 			</div>
 		</TagContainer>
+
 		<ListagemBuscas
 			v-if="
 				searchQuery.length > 0 ||
@@ -41,7 +43,7 @@
 		},
 		props: {
 			searchQuery: String,
-			selectedDay:String,
+			selectedDay: String,
 		},
 		data() {
 			return {
@@ -57,11 +59,10 @@
 		computed: {
 			filteredFeiras() {
 				if (this.feiras === undefined) {
-
 					return [];
 				}
 
-				if (this.localSearchQuery == "" && this.searchQuery=="") {
+				if (this.localSearchQuery == "" && this.searchQuery == "") {
 					return this.feiras;
 				}
 
