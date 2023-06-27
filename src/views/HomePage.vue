@@ -4,7 +4,7 @@
 			<SearchInput @search="updateSearchQuery"></SearchInput>
 			<ListagemFeiras
 				:searchQuery="searchQuery"
-				:selectedDay="selectedDay"
+				:tag="tag"
 			></ListagemFeiras>
 		</div>
 	</section>
@@ -20,12 +20,12 @@
 		data() {
 			return {
 				searchQuery: "",
-				selectedDay: null,
+				tag: null,
 			};
 		},
 		mounted() {
 			window.addEventListener("resize", this.handleResize);
-      this.selectedDay = this.$route.params.tag;
+      this.tag = this.$route.params.tag;
 		},
 		beforeUnmount() {
 			window.removeEventListener("resize", this.handleResize);

@@ -1,18 +1,17 @@
 <template>
 	<div>
 		<div v-if="feiras && feiras.length > 0">
-			<div
+			<FeiraCard
 				v-for="(feira, index) in feiras"
 				:key="index"
-				@click="navegarParaFeira(feira)"
-			>
-				<FeiraCard :feira="feira" :index="index"></FeiraCard>
-			</div>
+				:feira="feira"
+				:tipo="'busca'"
+				:index="index"
+			></FeiraCard>
 		</div>
 		<div v-else class="box">Nenhuma feira encontrada</div>
 	</div>
 </template>
-
 
 <script>
 	import FeiraCard from "./FeiraCard.vue";
@@ -30,9 +29,7 @@
 			FeiraCard,
 		},
 		methods: {
-			navegarParaFeira(feira) {
-				this.$router.push({ path: "/feira", query: { feiraId: feira._id } });
-			},
+
 		},
 	};
 </script>

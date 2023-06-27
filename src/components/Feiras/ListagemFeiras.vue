@@ -6,10 +6,11 @@
 					:title="tag"
 					@click="filtrarFeirasPorTag(tag)"
 					:selected="tag === localSearchQuery"
+					:type="'tipo'"
 				></TagsInfo>
 			</div>
 		</TagContainer>
-
+--->{{ searchQuery.length }}
 		<ListagemBuscas
 			v-if="
 				searchQuery.length > 0 ||
@@ -17,6 +18,7 @@
 			"
 			:feiras="filteredFeiras"
 		></ListagemBuscas>
+	
 		<ListagemPadrao
 			v-else
 			:feiras="feiras_semana"
@@ -32,6 +34,7 @@
 	import ListagemBuscas from "./ListagemBuscas.vue";
 	import ListagemPadrao from "./ListagemPadrao.vue";
 	import axios from "axios";
+	
 
 	export default {
 		name: "ListagemFeiras",
@@ -43,18 +46,28 @@
 		},
 		props: {
 			searchQuery: String,
-			selectedDay: String,
+			tag: String,
 		},
 		data() {
 			return {
 				feiras: {},
 				feiras_semana: {},
 				localSearchQuery: "",
+				selectedDay: "",
 			};
 		},
 		created() {},
 		mounted() {
 			this.listarFeiras();
+		},
+		watch: {
+			tag(newTag) {
+				if (!isNaN(parseInt(newTag))) {
+					this.selectedDay = parseInt(newTag);
+				} else {
+					this.$emit("update:searchQuery", newTag);
+				}
+			},
 		},
 		computed: {
 			filteredFeiras() {
@@ -62,43 +75,39 @@
 					return [];
 				}
 
-				if (this.localSearchQuery == "" && this.searchQuery == "") {
+				if (this.localSearchQuery === "" && this.searchQuery === "") {
 					return this.feiras;
 				}
 
-				var filtro = this.feiras;
-				if (this.localSearchQuery.length != 0) {
-					console.log("aquiss");
+				const normalizeString = (str) => {
+					return str
+						.normalize("NFD")
+						.replace(/[\u0300-\u036f]/g, "")
+						.replace(/\s+/g, "")
+						.toLowerCase();
+				};
+
+				let filtro = this.feiras;
+				if (this.localSearchQuery.length !== 0) {
+					const localSearchQueryNormalized = normalizeString(
+						this.localSearchQuery
+					);
 					filtro = filtro.filter((feira) =>
-						feira.tipo.includes(this.localSearchQuery)
+						normalizeString(feira.tipo).includes(localSearchQueryNormalized)
 					);
 				}
 				if (this.searchQuery.length > 0) {
-					console.log("aqui");
-					filtro = filtro.filter((feira) =>
-						feira.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
+					const searchQueryNormalized = normalizeString(this.searchQuery);
+					filtro = filtro.filter(
+						(feira) =>
+							normalizeString(feira.nome).includes(searchQueryNormalized) ||
+							normalizeString(feira.bairro).includes(searchQueryNormalized)
 					);
 				}
 				return filtro;
 			},
-
-			tiposDeFeira() {
-				if (this.feiras === undefined) {
-					return [];
-				}
-
-				const feirasArray = Object.values(this.feiras);
-
-				const tipos = feirasArray.reduce((tiposUnicos, feira) => {
-					if (!tiposUnicos.includes(feira.tipo)) {
-						tiposUnicos.push(feira.tipo);
-					}
-					return tiposUnicos;
-				}, []);
-
-				return tipos;
-			},
 		},
+
 		methods: {
 			listarFeiras() {
 				axios

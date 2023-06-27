@@ -17,15 +17,14 @@
 							<TagsInfo
 								v-for="(dia, index) in feira.dia_da_semana"
 								:key="index"
-								:title="retornaDia(dia)"
+								:title="dia"
 								:color="'verde-claro'"
 								class="tag-dia"
-								@click="selectDay(dia)"
 							></TagsInfo>
 						</div>
 
-						<TagsInfo :title="feira.bairro"></TagsInfo>
-						<TagsInfo :title="feira.tipo"></TagsInfo>
+						<TagsInfo :type="'bairro'" :title="feira.bairro"></TagsInfo>
+						<TagsInfo  :type="'tipo'" :title="feira.tipo"></TagsInfo>
 					</div>
 					<div class="horarios">
 						<BarraProgresso
@@ -110,22 +109,8 @@
 						console.log(error);
 					});
 			},
-			retornaDia(numeroDia) {
-				const diasDaSemana = [
-					"Domingo",
-					"Segunda",
-					"Terça",
-					"Quarta",
-					"Quinta",
-					"Sexta",
-					"Sábado",
-				];
-				return diasDaSemana[numeroDia];
-			},
-			selectDay(tag) {
-				const routeParams = { tag: tag }; // Define os parâmetros da rota
-				this.$router.push({ name: "HomePage", params: routeParams }); // Redireciona para a HomePage com os parâmetros
-			},
+
+
 			goTo(route) {
 				this.$router.push({ name: route });
 			},

@@ -1,6 +1,7 @@
 <template>
-  <div :class="[tagClass, { selecionada: selected }]">
-    {{ title }}
+  <div :class="[tagClass, { selecionada: selected }]" @click="selectDay(title,$event)" >
+     <span v-if="type=='dia'" >{{ retornaDia(title) }} </span>
+     <span v-else >{{ title }} </span> 
   </div>
 </template>
 
@@ -18,12 +19,35 @@ export default {
     selected: {
       type: Boolean,
       default: false
+    },
+    type:{
+      type: String,
+      default:'dia'
     }
   },
   computed: {
     tagClass() {
       return 'tag ' + this.color;
     }
+  },
+  methods:{
+    retornaDia(numeroDia) {
+				const diasDaSemana = [
+					"Domingo",
+					"Segunda",
+					"Terça",
+					"Quarta",
+					"Quinta",
+					"Sexta",
+					"Sábado",
+				];
+				return diasDaSemana[numeroDia];
+			},
+      selectDay(tag,event) {
+        event.stopPropagation();
+				const routeParams = { tag: tag }; 
+				this.$router.push({ name: "HomePage", params: routeParams });
+			},
   }
 }
 </script>
@@ -37,6 +61,7 @@ export default {
   font-size: 1rem;
   height: fit-content;
   font-weight: bold;
+  z-index: 100000;
 }
 
 .verde-claro {
