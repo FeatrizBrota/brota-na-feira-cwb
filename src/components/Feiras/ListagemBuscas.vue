@@ -9,7 +9,7 @@
 				:index="index"
 			></FeiraCard>
 		</div>
-		<div v-else class="box">Nenhuma feira encontrada</div>
+		<div v-else class="box sem-resultados">Nenhuma feira encontrada</div>
 	</div>
 </template>
 
@@ -33,3 +33,9 @@
 		},
 	};
 </script>
+<style scoped>
+.sem-resultados{
+	margin-top: 15px;
+}
+
+</style>

@@ -22,6 +22,7 @@
 				dias: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
 				dataAtual: "",
 				diaSelecionado: "",
+				teste:"",
 			};
 		},
 		props: {
@@ -31,11 +32,12 @@
 			this.dataAtual = new Date();
 			this.diaSelecionado = this.dataAtual.getDay();
 		},
+		mounted(){
+			this.teste = this.selectedDay
+		},
 		watch: {
-			selectedDay() {
-				if (this.selectedDay) {
-					this.diaSelecionado = this.selectedDay;
-				}
+			teste(){
+				this.diaSelecionado = this.selectedDay
 			},
 			diaSelecionado() {
 				this.$emit("dia-selecionado", this.diaSelecionado);

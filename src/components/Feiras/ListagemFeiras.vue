@@ -10,7 +10,6 @@
 				></TagsInfo>
 			</div>
 		</TagContainer>
---->{{ searchQuery.length }}
 		<ListagemBuscas
 			v-if="
 				searchQuery.length > 0 ||
@@ -18,7 +17,7 @@
 			"
 			:feiras="filteredFeiras"
 		></ListagemBuscas>
-	
+
 		<ListagemPadrao
 			v-else
 			:feiras="feiras_semana"
@@ -34,7 +33,6 @@
 	import ListagemBuscas from "./ListagemBuscas.vue";
 	import ListagemPadrao from "./ListagemPadrao.vue";
 	import axios from "axios";
-	
 
 	export default {
 		name: "ListagemFeiras",
@@ -46,7 +44,11 @@
 		},
 		props: {
 			searchQuery: String,
-			tag: String,
+			tag: {
+				type: String,
+				default: "",
+				reactive: true, // Ensure reactivity for the prop
+			},
 		},
 		data() {
 			return {
@@ -56,20 +58,31 @@
 				selectedDay: "",
 			};
 		},
-		created() {},
+		created() {
+			this.selectedDay = this.tag;
+		},
 		mounted() {
 			this.listarFeiras();
+			this.selectedDay = this.tag;
 		},
 		watch: {
-			tag(newTag) {
-				if (!isNaN(parseInt(newTag))) {
-					this.selectedDay = parseInt(newTag);
-				} else {
-					this.$emit("update:searchQuery", newTag);
-				}
-			},
+
 		},
 		computed: {
+			tiposDeFeira() {
+				if (this.feiras === undefined) {
+					return [];
+				}
+				const feirasArray = Object.values(this.feiras);
+				const tipos = feirasArray.reduce((tiposUnicos, feira) => {
+					if (!tiposUnicos.includes(feira.tipo)) {
+						tiposUnicos.push(feira.tipo);
+					}
+					return tiposUnicos;
+				}, []);
+				return tipos;
+			},
+
 			filteredFeiras() {
 				if (this.feiras === undefined) {
 					return [];
@@ -88,7 +101,9 @@
 				};
 
 				let filtro = this.feiras;
-				if (this.localSearchQuery.length !== 0) {
+				console.log('filtro',filtro)
+				if (this.localSearchQuery.length > 0 && filtro.length > 0) {
+					console.log('ddddddddd')
 					const localSearchQueryNormalized = normalizeString(
 						this.localSearchQuery
 					);
@@ -96,7 +111,7 @@
 						normalizeString(feira.tipo).includes(localSearchQueryNormalized)
 					);
 				}
-				if (this.searchQuery.length > 0) {
+				if (this.searchQuery.length > 0 && filtro.length > 0) {
 					const searchQueryNormalized = normalizeString(this.searchQuery);
 					filtro = filtro.filter(
 						(feira) =>
@@ -142,8 +157,11 @@
 			filtrarFeirasPorTag(tagTitle) {
 				if (this.localSearchQuery == tagTitle) {
 					this.localSearchQuery = "";
+					// this.$emit("update:searchQuery", ""); // Emitir evento para atualizar a propriedade searchQuery no componente pai
 				} else {
+					console.log("aaaaaaaaaaaaaaa");
 					this.localSearchQuery = tagTitle;
+					// this.$emit("update:searchQuery", tagTitle); // Emitir evento para atualizar a propriedade searchQuery no componente pai
 				}
 			},
 		},

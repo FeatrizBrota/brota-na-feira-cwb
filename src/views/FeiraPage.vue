@@ -18,13 +18,14 @@
 								v-for="(dia, index) in feira.dia_da_semana"
 								:key="index"
 								:title="dia"
+								:page="'feira'"
 								:color="'verde-claro'"
 								class="tag-dia"
 							></TagsInfo>
 						</div>
 
-						<TagsInfo :type="'bairro'" :title="feira.bairro"></TagsInfo>
-						<TagsInfo  :type="'tipo'" :title="feira.tipo"></TagsInfo>
+						<TagsInfo  :page="'feira'" :type="'bairro'" :title="feira.bairro"></TagsInfo>
+						<TagsInfo  :page="'feira'" :type="'tipo'" :title="feira.tipo"></TagsInfo>
 					</div>
 					<div class="horarios">
 						<BarraProgresso

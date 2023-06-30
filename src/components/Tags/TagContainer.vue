@@ -22,7 +22,7 @@
 		display: flex;
 		flex-wrap: nowrap;
 		padding: 8px;
-		cursor: pointer;
+		
 	}
     .tags:last-child{
         margin-bottom: 0;
