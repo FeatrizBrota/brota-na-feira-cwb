@@ -98,7 +98,7 @@
 		methods: {
 			chamaFeira(id) {
 				axios
-					.get(`http://${window.location.hostname}/feiras/${id}`, {
+					.get(`https://bnf-api-3560514cdc34.herokuapp.com/feiras/${id}`, {
 						timeout: 5000,
 					})
 					.then((response) => {

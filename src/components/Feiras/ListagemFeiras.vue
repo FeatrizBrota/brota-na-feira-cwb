@@ -111,7 +111,7 @@
 		methods: {
 			listarFeiras() {
 				axios
-					.get(`http://${window.location.hostname}/feiras`, {
+					.get(`https://bnf-api-3560514cdc34.herokuapp.com/feiras`, {
 						timeout: 5000,
 					})
 					.then((response) => {
