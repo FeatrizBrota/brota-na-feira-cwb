@@ -1,7 +1,8 @@
 <template>
-	<section class="home-page">
+	<section class="home-page"> 
 		<div class="container">
 			<SearchInput @search="updateSearchQuery"></SearchInput>
+      <SearchResults @clear-search="handleClearSearch" :searchQuery="searchQuery" ></SearchResults>
 			<ListagemFeiras
 				@update:searchQuery="onSearchQueryUpdate"
 				:searchQuery="searchQuery"
@@ -14,10 +15,11 @@
 <script>
 	import ListagemFeiras from "../components/Feiras/ListagemFeiras.vue";
 	import SearchInput from "../components/SearchInput/SearchInput.vue";
+  import SearchResults from "../components/SearchResults/SearchResults.vue";
 
 	export default {
 		name: "HomePage",
-		components: { ListagemFeiras, SearchInput },
+		components: { ListagemFeiras, SearchInput, SearchResults  },
 		data() {
 			return {
 				searchQuery: "",
@@ -32,7 +34,6 @@
 					if (newParams && newParams.tag) {
 						const newTag = newParams.tag;
 						
-
 						// Verificar se a tag é uma string de um número
 						const tagIsNumberString = /^\d+$/.test(newTag);
 
@@ -45,7 +46,17 @@
 				},
 			},
 		},
-
+		beforeRouteEnter(to, from, next) {
+			// Clear route parameters when the component is first entered
+			next(vm => {
+				vm.clearRouteParams();
+			});
+		},
+		beforeRouteUpdate(to, from, next) {
+			// Clear route parameters when the component is updated
+			this.clearRouteParams();
+			next();
+		},
 		mounted() {
 			window.addEventListener("resize", this.handleResize);
 			this.tag = this.$route.params.tag;
@@ -60,6 +71,13 @@
 			onSearchQueryUpdate(newSearchQuery) {
 				this.searchQuery = newSearchQuery; // Atualizar a propriedade searchQuery com o valor emitido pelo componente filho
 			},
+			clearRouteParams() {
+				// Clear route parameters
+				this.$router.replace({ path: this.$route.path, query: {} });
+			},
+      handleClearSearch(){
+        this.searchQuery = "";
+      }
 		},
 	};
 </script>

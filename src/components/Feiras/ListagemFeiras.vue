@@ -101,9 +101,7 @@
 				};
 
 				let filtro = this.feiras;
-				console.log('filtro',filtro)
 				if (this.localSearchQuery.length > 0 && filtro.length > 0) {
-					console.log('ddddddddd')
 					const localSearchQueryNormalized = normalizeString(
 						this.localSearchQuery
 					);
@@ -159,7 +157,6 @@
 					this.localSearchQuery = "";
 					// this.$emit("update:searchQuery", ""); // Emitir evento para atualizar a propriedade searchQuery no componente pai
 				} else {
-					console.log("aaaaaaaaaaaaaaa");
 					this.localSearchQuery = tagTitle;
 					// this.$emit("update:searchQuery", tagTitle); // Emitir evento para atualizar a propriedade searchQuery no componente pai
 				}
