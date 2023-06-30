@@ -111,7 +111,7 @@
 		methods: {
 			listarFeiras() {
 				axios
-					.get(`http://${window.location.hostname}:3000/feiras`, {
+					.get(`http://${window.location.hostname}/feiras`, {
 						timeout: 5000,
 					})
 					.then((response) => {

@@ -98,7 +98,7 @@
 		methods: {
 			chamaFeira(id) {
 				axios
-					.get(`http://${window.location.hostname}:3000/feiras/${id}`, {
+					.get(`http://${window.location.hostname}/feiras/${id}`, {
 						timeout: 5000,
 					})
 					.then((response) => {
