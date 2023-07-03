@@ -46,17 +46,7 @@
 				},
 			},
 		},
-		beforeRouteEnter(to, from, next) {
-			// Clear route parameters when the component is first entered
-			next(vm => {
-				vm.clearRouteParams();
-			});
-		},
-		beforeRouteUpdate(to, from, next) {
-			// Clear route parameters when the component is updated
-			this.clearRouteParams();
-			next();
-		},
+
 		mounted() {
 			window.addEventListener("resize", this.handleResize);
 			this.tag = this.$route.params.tag;
