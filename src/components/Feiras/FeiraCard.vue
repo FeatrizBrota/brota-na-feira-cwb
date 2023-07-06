@@ -62,6 +62,14 @@
 		cursor: pointer;
 	}
 
+	@media only screen and (max-width: 767px) {
+  /* Estilos para dispositivos móveis */
+  .dia{
+		display: flex;
+		overflow-x: scroll;
+	}
+}
+
 	.dia{
 		display: flex;
 	}
