@@ -13,7 +13,7 @@
 			<div class="info-feira">
 				<div class="info-tags">
 					<div class="tags">
-						<div>
+						<div class="dia">
 							<TagsInfo
 								v-for="(dia, index) in feira.dia_da_semana"
 								:key="index"
@@ -141,6 +141,10 @@
 		background-color: #fff;
 
 		min-height: 100vh;
+	}
+
+	.dia{
+		display: flex;
 	}
 	.header-feira {
 		display: flex;

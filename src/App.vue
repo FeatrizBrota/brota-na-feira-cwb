@@ -5,16 +5,19 @@
 		<div>
 			<RouterView></RouterView>
 		</div>
+		<FooterBar></FooterBar>
 	</div>
 </template>
 
 <script>
 	import MenuBarra from "./components/MenuBarra/MenuBarra.vue";
+	import FooterBar from "./components/Footer/FooterBar.vue";
 
 	export default {
 		name: "App",
 		components: {
 			MenuBarra,
+			FooterBar,
 		},
 	};
 </script>

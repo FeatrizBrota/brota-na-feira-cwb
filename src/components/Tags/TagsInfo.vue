@@ -63,7 +63,8 @@ export default {
       return diasDaSemana[numeroDia];
     },
     selectDay(tag, event) {
-      if (this.page != "home") {
+      
+      if (this.page != "home" || this.type!='tipo-home') {
         event.stopPropagation();
         const routeParams = { tag: tag };
         this.$router.push({ name: "HomePage", params: routeParams });

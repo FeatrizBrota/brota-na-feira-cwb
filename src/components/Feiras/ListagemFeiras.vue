@@ -1,12 +1,12 @@
 <template>
 	<div class="container">
-		<TagContainer>
+		<TagContainer v-if="searchQuery == ''">
 			<div class="tag" v-for="(tag, index) in tiposDeFeira" :key="index">
 				<TagsInfo
 					:title="tag"
 					@click="filtrarFeirasPorTag(tag)"
 					:selected="tag === localSearchQuery"
-					:type="'tipo'"
+					:type="'tipo-home'"
 				></TagsInfo>
 			</div>
 		</TagContainer>
@@ -65,9 +65,7 @@
 			this.listarFeiras();
 			this.selectedDay = this.tag;
 		},
-		watch: {
-
-		},
+		watch: {},
 		computed: {
 			tiposDeFeira() {
 				if (this.feiras === undefined) {
@@ -114,7 +112,8 @@
 					filtro = filtro.filter(
 						(feira) =>
 							normalizeString(feira.nome).includes(searchQueryNormalized) ||
-							normalizeString(feira.bairro).includes(searchQueryNormalized)
+							normalizeString(feira.bairro).includes(searchQueryNormalized) ||
+							normalizeString(feira.tipo).includes(searchQueryNormalized)
 					);
 				}
 				return filtro;
@@ -129,27 +128,85 @@
 					})
 					.then((response) => {
 						this.feiras = response.data;
-						const feirasPorDia = {
-							0: [], // domingo
-							1: [], // segunda
-							2: [], // terça
-							3: [], // quarta
-							4: [], // quinta
-							5: [], // sexta
-							6: [], // sábado
-						};
-
-						response.data.forEach((feira) => {
-							feira.dia_da_semana.forEach((dia) => {
-								feirasPorDia[dia].push(feira);
-							});
-						});
-
-						this.feiras_semana = feirasPorDia;
+						this.feiras = this.sortedFeiras(); // Ordenar as feiras após receber a resposta da API
+						this.separarFeirasPorDia();
 					})
 					.catch((error) => {
 						console.log(error);
 					});
+			},
+
+			sortedFeiras() {
+				if (this.feiras.length === 0) {
+					return [];
+				}
+
+				const currentTime = new Date().getTime(); // Obtém o horário atual em milissegundos
+				const sortedFeiras = [...this.feiras]; // Cria uma cópia do array de feiras
+
+				// Função auxiliar para converter o horário no formato "11h" para milissegundos
+				const convertTimeStringToMilliseconds = (timeString) => {
+					const hours = parseInt(timeString.replace("h", ""));
+					return hours * 60 * 60 * 1000;
+				};
+
+				// Ordena as feiras com base no horário de início
+				sortedFeiras.sort((a, b) => {
+					const timeA = convertTimeStringToMilliseconds(a.horario_inicial);
+					const timeB = convertTimeStringToMilliseconds(b.horario_inicial);
+
+					if (timeA === timeB) {
+						return 0;
+					} else if (timeA > timeB) {
+						return 1;
+					} else {
+						return -1;
+					}
+				});
+
+				// Divide as feiras em três grupos: feiras que já começaram, feiras que ainda vão começar e feiras que já terminaram
+				const currentFeiras = sortedFeiras.filter((feira) => {
+					const startTime = convertTimeStringToMilliseconds(
+						feira.horario_inicial
+					);
+					const endTime = convertTimeStringToMilliseconds(feira.horario_final);
+					return startTime <= currentTime && currentTime <= endTime;
+				});
+
+				const upcomingFeiras = sortedFeiras.filter((feira) => {
+					const startTime = convertTimeStringToMilliseconds(
+						feira.horario_inicial
+					);
+					return startTime > currentTime;
+				});
+
+				const pastFeiras = sortedFeiras.filter((feira) => {
+					const endTime = convertTimeStringToMilliseconds(feira.horario_final);
+					return endTime < currentTime;
+				});
+
+				// Concatena os grupos de feiras na ordem desejada
+				return [...currentFeiras, ...upcomingFeiras, ...pastFeiras];
+			},
+
+			separarFeirasPorDia() {
+				const feirasPorDia = {
+					0: [], // domingo
+					1: [], // segunda
+					2: [], // terça
+					3: [], // quarta
+					4: [], // quinta
+					5: [], // sexta
+					6: [], // sábado
+				};
+
+				this.feiras.forEach((feira) => {
+					feira.dia_da_semana.forEach((dia) => {
+						feirasPorDia[dia].push(feira);
+					});
+				});
+
+				this.feiras_semana = feirasPorDia;
 			},
 
 			filtrarFeirasPorTag(tagTitle) {

@@ -4,7 +4,12 @@
     <span v-else class="horarios">{{ inicio }} - {{ fim }}</span>
     <div class="barra-wrapper">
       <div v-if="!dadosCarregados" class="loading-bar"></div>
-      <div v-else class="barra" :style="{ width: progresso + '%' }"></div>
+      <div
+        v-else
+        class="barra"
+        :class="{ 'barra-iniciada': progresso > 0, 'barra-encerrada': progresso === 100 }"
+        :style="{ width: progresso + '%' }"
+      ></div>
     </div>
   </div>
 </template>
@@ -86,10 +91,8 @@ export default {
   border-radius: 5px;
 }
 
-
 .horarios {
   font-size: 1.2em;
-  
 }
 
 .loading-bar {
@@ -100,22 +103,18 @@ export default {
   background-color: #dddddde5;
   border-radius: 5px;
 }
+
 .barra {
   height: 100%;
-  background-color: #FF8300;
   border-radius: 5px;
   transition: width 0.3s;
 }
 
-@keyframes loadingAnimation {
-  0% {
-    width: 10%;
-  }
-  50% {
-    width: 50%;
-  }
-  100% {
-    width: 100%;
-  }
+.barra-iniciada {
+  background-color: #FF8300;
+}
+
+.barra-encerrada {
+  background-color: #6e6e6e;
 }
 </style>

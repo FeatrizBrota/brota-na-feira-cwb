@@ -17,6 +17,8 @@
     methods:{
       limpar(){
         this.$emit("clear-search", "");
+        const routeParams = { tag: "" };
+        this.$router.push({ name: "HomePage", params: routeParams });
 
       }
     }

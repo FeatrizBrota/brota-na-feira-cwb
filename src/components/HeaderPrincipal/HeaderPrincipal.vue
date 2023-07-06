@@ -48,7 +48,7 @@ export default {
 }
 
 .logo-img {
-  width: 10%;
+  width: 20%;
 }
 
 @media (min-width: 900px) {

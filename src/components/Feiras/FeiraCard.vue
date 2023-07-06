@@ -4,7 +4,7 @@
 			<div @click="navegarParaFeira(feira)" class="content">
 				<div class="display-flex titulo-feira">
 					<h1 class="title">{{ feira.nome }}</h1>
-					<i class="fa-regular fa-circle-check"></i>
+					<!-- <i class="fa-regular fa-circle-check"></i> -->
 				</div>
 				<div class="endereco-feira">
 					<h2>{{ feira.endereco }}</h2>
@@ -16,11 +16,12 @@
 				<div class="bairro-box">
 					<TagsInfo  :type="'bairro'" :title="feira.bairro"></TagsInfo>
 					<TagsInfo :type="'tipo'"   :title="feira.tipo"></TagsInfo>
-					<div v-if="tipo == 'busca' " >
+					<div class="dia" v-if="tipo == 'busca' " >
 						<TagsInfo
 							v-for="(dia, index) in feira.dia_da_semana"
 							:key="index"
 							:title="dia"
+							
              
 						></TagsInfo>
 					</div>
@@ -59,6 +60,10 @@
 	.card-feira {
 		margin-top: 10px;
 		cursor: pointer;
+	}
+
+	.dia{
+		display: flex;
 	}
 
 	.titulo-feira h1 {
