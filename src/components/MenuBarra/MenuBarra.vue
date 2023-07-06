@@ -13,8 +13,8 @@
   
     <div class="navbar-menu" :class="{'is-active': isMenuOpen}">
       <div class="navbar-start">
-        <a class="navbar-item" href="#" @click="goTo('HomePage')" :class="{'is-active': activeItem === 'feiras'}">Feiras</a>
-        <a class="navbar-item" href="#" @click="goTo('ColaborePage')" :class="{'is-active': activeItem === 'colabore'}">Colabore</a>
+        <a class="navbar-item"  @click="goTo('HomePage')" :class="{'is-active': activeItem === 'feiras'}">Feiras</a>
+        <a class="navbar-item"  @click="goTo('ColaborePage')" :class="{'is-active': activeItem === 'colabore'}">Colabore</a>
       </div>
     </div>
   </nav>

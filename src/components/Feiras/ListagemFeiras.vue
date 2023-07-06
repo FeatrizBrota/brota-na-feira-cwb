@@ -141,13 +141,14 @@
 					return [];
 				}
 
-				const currentTime = new Date().getTime(); // Obtém o horário atual em milissegundos
+				const currentTime = new Date().getHours();
+				// Obtém o horário atual em milissegundos
 				const sortedFeiras = [...this.feiras]; // Cria uma cópia do array de feiras
 
 				// Função auxiliar para converter o horário no formato "11h" para milissegundos
 				const convertTimeStringToMilliseconds = (timeString) => {
 					const hours = parseInt(timeString.replace("h", ""));
-					return hours * 60 * 60 * 1000;
+					return hours
 				};
 
 				// Ordena as feiras com base no horário de início
@@ -184,6 +185,8 @@
 					const endTime = convertTimeStringToMilliseconds(feira.horario_final);
 					return endTime < currentTime;
 				});
+
+		
 
 				// Concatena os grupos de feiras na ordem desejada
 				return [...currentFeiras, ...upcomingFeiras, ...pastFeiras];

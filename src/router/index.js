@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomePage from '../views/HomePage.vue';
 import UserPage from '../views/UserPage.vue';
 import FeiraPage from '../views/FeiraPage.vue';
+import ColaborePage from '../views/ColaborePage.vue';
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: '/feira',
         name: 'FeiraPage',
         component: FeiraPage
+    },
+    {
+        path: '/colabore',
+        name: 'ColaborePage',
+        component: ColaborePage
     }
 ];
 
