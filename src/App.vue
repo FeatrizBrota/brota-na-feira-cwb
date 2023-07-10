@@ -30,7 +30,7 @@
 		color: #2c3e50;
 		background-color: #f8f3f3;
 		max-height: 100%;
-		padding-top: 80px;
+		padding-top: 80px !important;
 		/* padding-bottom: 100px; Define uma margem inferior para reservar espaço para o menu bar */
 	}
 
