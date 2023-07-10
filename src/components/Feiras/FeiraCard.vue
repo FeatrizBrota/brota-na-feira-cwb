@@ -65,6 +65,9 @@
   /* Estilos para dispositivos móveis */
   .dia{
 		display: flex;
+		
+	}
+	.bairro-box {
 		overflow-x: scroll;
 	}
 }
