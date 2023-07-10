@@ -60,6 +60,7 @@
 		margin-top: 10px;
 		cursor: pointer;
 	}
+	
 
 	@media only screen and (max-width: 767px) {
   /* Estilos para dispositivos móveis */
