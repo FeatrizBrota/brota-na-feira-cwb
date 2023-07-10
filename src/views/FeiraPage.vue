@@ -24,8 +24,16 @@
 							></TagsInfo>
 						</div>
 
-						<TagsInfo  :page="'feira'" :type="'bairro'" :title="feira.bairro"></TagsInfo>
-						<TagsInfo  :page="'feira'" :type="'tipo'" :title="feira.tipo"></TagsInfo>
+						<TagsInfo
+							:page="'feira'"
+							:type="'bairro'"
+							:title="feira.bairro"
+						></TagsInfo>
+						<TagsInfo
+							:page="'feira'"
+							:type="'tipo'"
+							:title="feira.tipo"
+						></TagsInfo>
 					</div>
 					<div class="horarios">
 						<BarraProgresso
@@ -48,7 +56,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="box box-colabore">
+				<div v-show="!isLiked && !isDisliked" class="box box-colabore">
 					<h2>Essa Informação foi útil?</h2>
 					<div class="box-vote">
 						<i
@@ -57,9 +65,10 @@
 							@click="toggleLike"
 						></i>
 						<i
-							class="fa-regular fa-thumbs-down"
+							class="fa-regular fa-thumbs-down "
 							:class="{ active: isDisliked === true }"
 							@click="toggleDislike"
+							data-target="modalDislike"
 						></i>
 					</div>
 
@@ -71,6 +80,19 @@
 						recurso confiável e completo. Participe!
 					</p>
 				</div>
+				<div v-if="isDisliked" class="modal is-active">
+					<div class="modal-background"></div>
+					<div class="modal-card">
+						<header class="modal-card-head">
+							<p class="modal-card-title">Reportar erro</p>
+							<button class="delete" @click="toggleDislike" aria-label="close"></button>
+						</header>
+						<section class="modal-card-body">
+							<FormMensagem></FormMensagem>
+						</section>
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -79,10 +101,12 @@
 <script>
 	import BarraProgresso from "@/components/BarraProgresso/BarraProgresso.vue";
 	import TagsInfo from "@/components/Tags/TagsInfo.vue";
+	import FormMensagem from "../components/Forms/FormMensagem.vue";
+
 	import axios from "axios";
 	export default {
 		name: "FeiraPage",
-		components: { BarraProgresso, TagsInfo },
+		components: { BarraProgresso, TagsInfo ,FormMensagem},
 		data() {
 			return {
 				feiraId: null,
@@ -110,7 +134,6 @@
 						console.log(error);
 					});
 			},
-
 
 			goTo(route) {
 				this.$router.push({ name: route });
@@ -141,9 +164,10 @@
 		background-color: #fff;
 		padding: 10px;
 		min-height: 100vh;
+		min-width: 100%;
 	}
 
-	.dia{
+	.dia {
 		display: flex;
 	}
 	.header-feira {

@@ -49,6 +49,10 @@ export default {
 }
 
 .navbar {
+  position: fixed; 
+  top: 0;
+  width: 100%; 
+  z-index: 9;
   margin-bottom: 2rem;
 }
 

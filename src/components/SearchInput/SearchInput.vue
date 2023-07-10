@@ -46,7 +46,7 @@ input[type="text"] {
   padding: 12px 22px;
   margin: 0 30px;
   color: #1B3C1D;
-  border: 1px solid #cccccc41;
+  border: 2px solid #ff840056;
   box-shadow: 3px 6px #cccccc15;
   border-radius: 20px;
   font-size: 16px;
