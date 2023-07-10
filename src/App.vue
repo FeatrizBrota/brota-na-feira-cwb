@@ -2,7 +2,7 @@
 	<div>
 		<MenuBarra></MenuBarra>
 
-		<div>
+		<div class="container">
 			<RouterView></RouterView>
 		</div>
 		<FooterBar></FooterBar>
@@ -30,10 +30,11 @@
 		color: #2c3e50;
 		background-color: #f8f3f3;
 		max-height: 100%;
-		padding-top: 80px !important;
 		/* padding-bottom: 100px; Define uma margem inferior para reservar espaço para o menu bar */
 	}
-
+.container{
+	padding-top: 40px;
+}
 	.columns {
 		display: flex;
 		flex-wrap: wrap;
