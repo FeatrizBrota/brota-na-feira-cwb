@@ -11,12 +11,10 @@
 <style scoped>
 	.tag-container {
 		width: 100%;
-		/* overflow-x: auto; */
+		overflow-x: auto;
 	}
 
-	/* .tag-scroll {
-    display: flex;
-  } */
+
 
 	.tags {
 		display: flex;
