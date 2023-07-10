@@ -21,7 +21,6 @@
 							v-for="(dia, index) in feira.dia_da_semana"
 							:key="index"
 							:title="dia"
-							
              
 						></TagsInfo>
 					</div>

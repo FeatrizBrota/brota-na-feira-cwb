@@ -1,5 +1,12 @@
 <template>
 	<section>
+		<div class="notification is-success" v-if="mensagemSucesso">
+			Formulário enviado com sucesso!
+		</div>
+		<div class="notification is-danger" v-if="mensagemErro">
+			Erro ao enviar o formulário. Por favor, tente novamente.
+		</div>
+
 		<form @submit.prevent="enviarFormulario">
 			<div class="field flex-field">
 				<div class="field is-expanded is-7">
@@ -58,7 +65,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+	import axios from "axios";
 	export default {
 		data() {
 			return {
@@ -66,6 +73,8 @@ import axios from 'axios';
 				email: "",
 				assunto: "",
 				mensagem: "",
+				mensagemSucesso: false,
+				mensagemErro: false,
 			};
 		},
 		methods: {
@@ -78,7 +87,10 @@ import axios from 'axios';
 				};
 
 				axios
-					.post("https://bnf-api-3560514cdc34.herokuapp.com/mensagens", mensagem)
+					.post(
+						"https://bnf-api-3560514cdc34.herokuapp.com/mensagens",
+						mensagem
+					)
 					.then((response) => {
 						console.log("Formulário enviado com sucesso");
 						console.log("Resposta do servidor:", response.data);
@@ -87,9 +99,13 @@ import axios from 'axios';
 						this.email = "";
 						this.assunto = "";
 						this.mensagem = "";
+						this.mensagemSucesso = true;
+						this.mensagemErro = false;
 					})
 					.catch((error) => {
 						console.error("Erro ao enviar formulário:", error);
+						this.mensagemSucesso = false;
+						this.mensagemErro = true;
 					});
 			},
 		},

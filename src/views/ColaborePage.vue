@@ -28,14 +28,7 @@
 		},
 		components: { FormMensagem },
 		methods: {
-			enviarFormulario() {
-				// Aqui você pode adicionar a lógica para enviar o formulário
-				// Por exemplo, chamar uma API ou executar outras ações
-				console.log("Formulário enviado");
-				console.log("Nome:", this.nome);
-				console.log("E-mail:", this.email);
-				console.log("Mensagem:", this.mensagem);
-			},
+		
 		},
 	};
 </script>

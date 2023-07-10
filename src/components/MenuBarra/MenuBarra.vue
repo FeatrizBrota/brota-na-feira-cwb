@@ -44,10 +44,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.navbar-item img{
+.navbar-item img {
   max-height: 2.5rem;
 }
+
 .navbar {
   margin-bottom: 2rem;
 }
@@ -79,14 +79,15 @@ export default {
 }
 
 .navbar-start .navbar-item.is-active {
-  background-color: #1B3C1D !important;
+  background-color: #1B3C1D;
+  color: #FFF; /* Change the text color for the active item */
 }
 
 .navbar-start .navbar-item.is-active:hover {
-  background-color: #1B3C1D !important;
+  background-color: #1B3C1D;
 }
 
 .navbar-start .navbar-item:active {
-  background-color: #1B3C1D !important;
+  background-color: #1B3C1D;
 }
 </style>

@@ -36,12 +36,20 @@ export default {
     };
   },
   mounted() {
-    this.carregarDados();
+    this.carregarDados(); 
+
+
+  },
+  watch:{
+    dataInicio(){
+      this.carregarDados(); 
+      
+    }
   },
   methods: {
-    async carregarDados() {
+     carregarDados() {
       // Simulando um atraso de 2 segundos para carregar os dados
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const inicioHoras = parseInt(this.dataInicio);
       const fimHoras = parseInt(this.dataFim);
@@ -60,8 +68,8 @@ export default {
 
       this.inicio = this.dataInicio;
       this.fim = this.dataFim;
-
       this.dadosCarregados = true;
+      
     }
   }
 };

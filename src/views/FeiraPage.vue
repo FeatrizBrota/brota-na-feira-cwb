@@ -139,7 +139,7 @@
 
 	.conteudo {
 		background-color: #fff;
-
+		padding: 10px;
 		min-height: 100vh;
 	}
 
