@@ -1,7 +1,7 @@
 <template>
   <div class="menu-principal" v-if="isMobileOrTablet">
     <div class="logo-container">
-      <img src="images/logo.png" alt="Logo Brota na Feira" class="logo-img">
+      <!-- <img src="images/logo.png" alt="Logo Brota na Feira" class="logo-img"> -->
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
 }
 
 .logo-img {
-  width: 20%;
+  width: 100%;
 }
 
 @media (min-width: 900px) {

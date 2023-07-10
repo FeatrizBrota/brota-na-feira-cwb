@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <img src="images/logo.png" alt="Logo">
+        <img class="logo-img" src="images/logo.png" alt="Logo">
       </a>
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" @click="toggleMenu">
         <span aria-hidden="true"></span>
@@ -45,7 +45,9 @@ export default {
 
 <style lang="scss" scoped>
 
-
+.navbar-item img{
+  max-height: 2.5rem;
+}
 .navbar {
   margin-bottom: 2rem;
 }

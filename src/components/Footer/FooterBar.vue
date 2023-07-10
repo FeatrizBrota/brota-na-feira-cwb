@@ -1,7 +1,10 @@
 <template>
     <footer class="footer">
       <div class="content has-text-centered">
+        <a href="https://brotinha.com" target="_blank">
         <img src="images/logo-pb.png" alt="Logo" class="footer-logo">
+      </a>
+
       </div>
     </footer>
   </template>
