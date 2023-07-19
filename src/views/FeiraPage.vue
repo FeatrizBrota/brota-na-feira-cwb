@@ -171,6 +171,7 @@
 
 	.dia {
 		display: flex;
+		overflow: auto;
 	}
 	.header-feira {
 		display: flex;
