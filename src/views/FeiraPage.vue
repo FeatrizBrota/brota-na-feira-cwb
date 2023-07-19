@@ -39,6 +39,7 @@
 						<BarraProgresso
 							:dataInicio="feira.horario_inicial"
 							:dataFim="feira.horario_final"
+							:dia="feira.dia_da_semana"
 						></BarraProgresso>
 					</div>
 				</div>

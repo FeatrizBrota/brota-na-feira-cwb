@@ -12,6 +12,7 @@
 				<BarraProgresso
 					:dataInicio="feira.horario_inicial"
 					:dataFim="feira.horario_final"
+					:dia="feira.dia_da_semana"
 				></BarraProgresso>
 				<div class="bairro-box">
 					<TagsInfo  :type="'bairro'" :title="feira.bairro"></TagsInfo>
