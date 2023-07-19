@@ -4,12 +4,16 @@
     <span v-else class="horarios">{{ inicio }} - {{ fim }}</span>
     <div class="barra-wrapper">
       <div v-if="!dadosCarregados" class="loading-bar"></div>
+      
       <div
         v-else
         class="barra"
         :class="{ 'barra-iniciada': progresso > 0, 'barra-encerrada': progresso === 100 }"
         :style="{ width: progresso + '%' }"
-      ></div>
+      > 
+    </div>
+    <p v-if="progresso < 0" >A feira ainda não começou</p>
+    <p v-else-if="progresso ===100"> A feira ja terminou</p>
     </div>
   </div>
 </template>
@@ -83,6 +87,11 @@ export default {
   align-items: center;
 }
 
+p{
+  margin-top: -30px;
+  color: #FF8300;
+  font-size: 12px;
+}
 .barra-wrapper {
   width: 50%;
   height: 10px;
