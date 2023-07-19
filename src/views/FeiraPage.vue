@@ -46,12 +46,13 @@
 				<div class="box box-endereco">
 					<div class="info-endereco">
 						<h2>Como Brotar:</h2>
-						<p>{{ feira.endereco }}</p>
+						<p>{{ feira.endereco }} - {{ feira.bairro }}</p>
 						<p class="referencia">{{ feira.referencia }}</p>
 					</div>
 
 					<div class="img-map" @click="linkMaps(feira.link_maps)">
 						<div class="sob-img-map">
+							<i class="fa-solid fa-location-dot"></i>
 							<h1>Brotar</h1>
 						</div>
 					</div>
@@ -158,6 +159,7 @@
 		display: flex;
 		justify-content: center;
 		width: 100%;
+		margin: 2rem 0;
 	}
 
 	.conteudo {
@@ -220,7 +222,7 @@
 	}
 	.tags {
 		display: flex;
-		justify-content: space-between;
+		justify-content:flex-start;
 	}
 
 	.img-map {
@@ -244,6 +246,10 @@
 				color: #ff8300;
 				font-size: 25px;
 				font-weight: 800;
+			}
+
+			i{
+				margin-right: 10px;
 			}
 
 			background-color: #ff90e757;

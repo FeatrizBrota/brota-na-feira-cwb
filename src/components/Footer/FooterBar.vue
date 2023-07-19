@@ -3,6 +3,7 @@
       <div class="content has-text-centered">
         <a href="https://brotinha.com" target="_blank">
         <img src="images/logo-pb.png" alt="Logo" class="footer-logo">
+        <p> Desenvolvido por  <a href="https://brotinha.com" target="_blank">Brota na web </a> </p>
       </a>
 
       </div>
@@ -19,6 +20,20 @@
     width: 100%;
     z-index: 999;
   }
+
+  p{
+    color:#535252;
+    font-size:10px;
+
+
+  }
+  a{
+      color:#FF8300;
+    }
+
+    a:hover{
+      color:#1B3C1D;
+    }
   
   .footer-logo {
     max-width: 70px;
