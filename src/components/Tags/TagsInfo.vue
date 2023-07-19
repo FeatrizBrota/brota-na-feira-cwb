@@ -99,8 +99,7 @@ export default {
 }
 
 .verde-claro:hover {
-  background-color: #1b3c1d;
-  color: #b7d739;
+  transform: scale(1.2);
 }
 
 .selecionada {
