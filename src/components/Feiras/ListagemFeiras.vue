@@ -115,6 +115,8 @@
 							normalizeString(feira.bairro).includes(searchQueryNormalized) ||
 							normalizeString(feira.tipo).includes(searchQueryNormalized) ||
 							normalizeString(feira.referencia).includes(searchQueryNormalized)
+							||
+							normalizeString(feira.endereco).includes(searchQueryNormalized)
 					);
 				}
 				return filtro;
